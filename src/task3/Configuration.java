@@ -2,7 +2,12 @@ package task3;
 
 import java.io.Serializable;
 
-public class Configuration implements Serializable {
+/*
+ * Вариант пятый
+
+
+ */
+public final class Configuration implements Serializable {
 
 	private static final long serialVersionUID = -7604766932017737115L;
 
@@ -17,6 +22,13 @@ public class Configuration implements Serializable {
 		return ConfigurationHelper.instance;
 	}
 
+	//How do you prevent for creating another instance of Singleton during serialization
+	/*
+	 * You can prevent this by using readResolve() method, 
+	 * since during serialization readObject() is used to create instance and it return new instance every time 
+	 * but by using readResolve you can replace it with original Singleton instance.
+
+	 */
 	protected Object readResolve() {
 		return getInstance();
 	}
